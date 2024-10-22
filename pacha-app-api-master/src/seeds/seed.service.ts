@@ -8,13 +8,23 @@ export class SeedService {
   async seed() {
     const users = [
       {
-        email: 'iliass@example.com',
-        firstname: 'iliass',
-        lastname: 'aff',
+        email: 'hicham@pacha.com',
+        firstname: 'hicham',
+        lastname: 'pacha',
       },
       {
-        email: 'med@example.com',
-        firstname: 'ilia',
+        email: 'wafae@pacha.com',
+        firstname: 'wafae',
+        lastname: 'aux',
+      },
+      {
+        email: 'abdilah@pacha.com',
+        firstname: 'abdilah',
+        lastname: 'auxx',
+      },
+      {
+        email: 'iliass@pacha.com',
+        firstname: 'iliass',
         lastname: 'med',
       },
     ];

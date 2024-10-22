@@ -61,7 +61,7 @@ export function UserNav({}) {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             <AvatarImage
-              src={'https://github.com/shadcn.png'}
+              src={'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Coat_of_arms_of_Morocco.svg/langfr-1024px-Coat_of_arms_of_Morocco.svg.png'}
               alt="@username"
             />
             <AvatarFallback>{user?.firstName?.[0]}</AvatarFallback>

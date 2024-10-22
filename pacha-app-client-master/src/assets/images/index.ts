@@ -1,4 +1,4 @@
-import BannerImage from './jpg/banner.jpeg';
+import BannerImage from './jpg/banner.png';
 
 import ThumbnailPlaceholder from './jpg/thumbnail-placeholder.jpg';
 

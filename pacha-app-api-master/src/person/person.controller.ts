@@ -57,7 +57,6 @@ export class PersonController {
 
     return person;
   }
-  @UseGuards(AtGuard)
   @Get('docs/:filename')
   async getFile(@Param('filename') filename: string, @Res() res: Response) {
     const filePath = path.join(

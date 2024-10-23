@@ -1,5 +1,5 @@
 import { DataTableSkeleton } from '@/components/data-table';
-import { DateRangePicker } from '@/components/ui/date-range-picker';
+// import { DateRangePicker } from '@/components/ui/date-range-picker';
 import { Shell } from '@/components/ui/shell';
 import { PeopleTable } from '@/features/dashboard/overview/tables';
 import { TableProvider } from '@/hooks';
@@ -57,12 +57,12 @@ export const Dashboard: React.FC = () => {
            * It is used to filter the tasks based on the selected date range it was created at.
            * The business logic for filtering the tasks based on the selected date range is handled inside the component.
            */}
-          <DateRangePicker
+          {/* <DateRangePicker
             triggerSize="sm"
             triggerClassName="ml-auto w-56 sm:w-60"
             align="end"
             queryNames={{ from: 'fromcreatedAt', to: 'tocreatedAt' }}
-          />
+          /> */}
           {/**
            * Passing promises and consuming them using React.use for triggering the suspense fallback.
            * @see https://react.dev/reference/react/use

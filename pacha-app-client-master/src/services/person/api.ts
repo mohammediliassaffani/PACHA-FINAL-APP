@@ -38,6 +38,24 @@ export const createPerson = async (
     },
   });
 };
+// export const updatePerson = async (id: number, data: Omit<PersonType, 'docs'>) => {
+//   await client.put(`person/${id}`, data);
+// };
+
+
+
+export const updatePersonInDatabase = async (id: number, updatedData: Partial<PersonType>): Promise<void> => {
+  try {
+    const response = await client.put(`/api/person/${id}`, updatedData);
+
+    if (response.status !== 200) {
+      throw new Error(`Failed to update person: ${response.statusText}`);
+    }
+  } catch (error) {
+    console.error('Error updating person:', error);
+    throw error;
+  }
+};
 
 export const deleteMany = async (ids: number[]) => {
   await client.delete('person/delete-many', { data: { ids } });

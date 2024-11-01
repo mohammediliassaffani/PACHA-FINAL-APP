@@ -7,6 +7,7 @@ import {
 import { IPersonService } from './interfaces/person.interfaces';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreatePersonDto } from './dto/create-person.dto';
+import { UpdatePersonDto } from './dto/update-person.dto';
 import { Person } from '@prisma/client';
 
 @Injectable()
@@ -143,6 +144,31 @@ export class PersonService implements IPersonService {
       );
     }
   }
+  // Update the person
+  async update(id: number, updatePersonDto: UpdatePersonDto): Promise<Person> {
+    try {
+      // Check if the person exists
+      const existingPerson = await this.prisma.person.findUnique({
+        where: { id },
+      });
+
+      if (!existingPerson) {
+        throw new HttpException('Person not found', HttpStatus.NOT_FOUND);
+      }
+      // Update the person with the provided data
+      const updatedPerson = await this.prisma.person.update({
+        where: { id },
+        data: {
+          ...updatePersonDto,
+        },
+      });
+
+      return updatedPerson;
+    } catch (error) {
+      throw new InternalServerErrorException('Error updating the person');
+    }
+  }
+
   /**
    * Deletes multiple persons by their IDs.
    * @param input - An object containing the array of person IDs to delete.

@@ -5,6 +5,7 @@ import { Toaster } from '@/components/ui/sonner';
 import { ThemeProvider } from './hooks';
 import { routes } from './routes';
 
+
 const queryClient = new QueryClient();
 const router = createBrowserRouter(routes);
 
@@ -14,7 +15,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
         <Toaster />
-
+        
         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </ThemeProvider>

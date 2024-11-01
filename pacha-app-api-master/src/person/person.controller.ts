@@ -7,6 +7,7 @@ import {
   HttpStatus,
   Inject,
   Param,
+  Put,
   Post,
   Query,
   Res,
@@ -23,6 +24,7 @@ import { FilesInterceptor } from '@nestjs/platform-express';
 import { AtGuard } from 'src/utils/guards';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { diskStorage } from 'multer';
+import { UpdatePersonDto } from './dto/update-person.dto';
 import { DeletePersonsDto } from './dto/delete-people.dto';
 @Controller(Routes.PERSON)
 export class PersonController {
@@ -102,5 +104,14 @@ export class PersonController {
   async deleteMany(@Body() deletePersonsDto: DeletePersonsDto) {
     const result = await this.personService.deletePersons(deletePersonsDto);
     return result;
+  }
+  @UseGuards(AtGuard)
+  @Put(':id')
+  async updatePerson(
+    @Param('id') id: number,
+    @Body() updatePersonDto: UpdatePersonDto,
+  ) {
+    const updatedPerson = await this.personService.update(id, updatePersonDto);
+    return updatedPerson;
   }
 }

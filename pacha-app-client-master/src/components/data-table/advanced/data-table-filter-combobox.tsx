@@ -49,7 +49,7 @@ export function DataTableFilterCombobox<TData>({
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      {/* <PopoverTrigger asChild>
         {children ?? (
           <Button
             variant="outline"
@@ -61,10 +61,10 @@ export function DataTableFilterCombobox<TData>({
               className="mr-2 size-4 shrink-0"
               aria-hidden="true"
             />
-            Filter
+            F
           </Button>
         )}
-      </PopoverTrigger>
+      </PopoverTrigger> */}
       <PopoverContent className="w-[12.5rem] p-0" align="end">
         <Command>
           <CommandInput placeholder="Filter by..." />

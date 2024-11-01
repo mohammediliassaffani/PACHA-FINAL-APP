@@ -1,5 +1,6 @@
 import { Person } from '@prisma/client';
 import { CreatePersonDto } from '../dto/create-person.dto';
+import { UpdatePersonDto } from '../dto/update-person.dto';
 
 export interface IPersonService {
   create(createPerson: CreatePersonDto & { docs: string[] }): Promise<Person>;
@@ -24,6 +25,9 @@ export interface IPersonService {
     perPage: number,
   ): Promise<{ persons: Partial<Person>[]; totalPages: number }>;
 
+  // update person by their IDs
+
+  update(id: number, updatePersonDto: UpdatePersonDto): Promise<Person>;
   /**
    * Deletes multiple persons by their IDs.
    * @param input - An object containing the array of person IDs to delete.

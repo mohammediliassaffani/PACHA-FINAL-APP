@@ -5,11 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 
 import { DataTableColumnHeader } from '@/components/data-table';
-import { EyeIcon, Trash2Icon } from 'lucide-react';
+import { EyeIcon, Trash2Icon,ClipboardPenLine } from 'lucide-react';
 import { PersonType } from '@/services/person';
 import PersonModal from '../dialog/view-persone-dialog';
+import UpdatePersonModal from '../dialog/update-person-modal'
 import { DeletePersonsDialog } from '../dialog/delete-person-dialog';
-
+import { updatePersonInDatabase } from '@/services/person/api';
 export function getColumns(): ColumnDef<PersonType>[] {
   return [
     {
@@ -103,11 +104,84 @@ export function getColumns(): ColumnDef<PersonType>[] {
       },
     },
 
+    // {
+    //   id: 'actions',
+    //   cell: function Cell({ row }) {
+    //     const [showPerson, setShowPerson] = React.useState(false);
+    //     const [showDelete, setShowDelete] = React.useState(false);
+
+    //     return (
+    //       <>
+    //         <PersonModal
+    //           open={showPerson}
+    //           onOpenChange={setShowPerson}
+    //           person={row.original}
+    //           showTrigger={false}
+    //         />
+    //         <DeletePersonsDialog
+    //           open={showDelete}
+    //           onOpenChange={setShowDelete}
+    //           persons={[row.original]}
+    //           showTrigger={false}
+    //         />
+    //         <div className="flex gap-4 flex-row">
+    //           <Button
+    //             aria-label="Open menu"
+    //             variant="ghost"
+    //             className="data-[state=open]:bg-muted flex size-8 p-0"
+    //             onClick={() => setShowPerson(true)}
+    //           >
+    //             <EyeIcon className="size-4" aria-hidden="true" />
+    //           </Button>
+    //           <Button
+    //             aria-label="Open menu"
+    //             variant="ghost"
+    //             className="data-[state=open]:bg-muted flex size-8 p-0"
+    //             onClick={() => setShowDelete(true)}
+    //           >
+    //             <Trash2Icon
+    //               className="size-4 text-destructive"
+    //               aria-hidden="true"
+    //             />
+    //           </Button>
+    //           <Button
+    //             aria-label="Open menu"
+    //             variant="ghost"
+    //             className="data-[state=open]:bg-muted flex size-8 p-0"
+    //             onClick={() => setShowDelete(true)}
+    //           >
+    //             <ClipboardPenLine
+    //               className="size-4 text-destructive"
+    //               aria-hidden="true"
+                  
+    //             />
+    //           </Button>
+    //         </div>
+    //       </>
+    //     );
+    //   },
+    // },
     {
       id: 'actions',
       cell: function Cell({ row }) {
         const [showPerson, setShowPerson] = React.useState(false);
         const [showDelete, setShowDelete] = React.useState(false);
+        const [showUpdate, setShowUpdate] = React.useState(false);
+        const [selectedPerson, setSelectedPerson] = React.useState<PersonType | null>(null);
+
+        const handleUpdate = async (id: number, updatedData: Partial<PersonType>) => {
+          try {
+            await updatePersonInDatabase(id, updatedData);
+            // Update the local state to reflect the changes
+            setPeople((prevPeople) =>
+              prevPeople.map((person) => (person.id === id ? { ...person, ...updatedData } : person))
+            );
+            setShowUpdate(false); // Close the modal after updating
+          } catch (error) {
+            console.error('Error updating person:', error);
+              // Optionally, show an error message to the user
+          }
+      }
 
         return (
           <>
@@ -123,6 +197,12 @@ export function getColumns(): ColumnDef<PersonType>[] {
               persons={[row.original]}
               showTrigger={false}
             />
+            <UpdatePersonModal
+              open={showUpdate}
+              onOpenChange={setShowUpdate}
+              person={row.original}
+              onUpdate={handleUpdate}
+            />
             <div className="flex gap-4 flex-row">
               <Button
                 aria-label="Open menu"
@@ -133,12 +213,26 @@ export function getColumns(): ColumnDef<PersonType>[] {
                 <EyeIcon className="size-4" aria-hidden="true" />
               </Button>
               <Button
-                aria-label="Open menu"
+                aria-label="Delete person"
                 variant="ghost"
                 className="data-[state=open]:bg-muted flex size-8 p-0"
                 onClick={() => setShowDelete(true)}
               >
                 <Trash2Icon
+                  className="size-4 text-destructive"
+                  aria-hidden="true"
+                />
+              </Button>
+              <Button
+                aria-label="Update person"
+                variant="ghost"
+                className="data-[state=open]:bg-muted flex size-8 p-0"
+                // onClick={() => {
+                //   setSelectedPerson(row.original);
+                //   setShowUpdate(true);
+                // }}
+              >
+                <ClipboardPenLine
                   className="size-4 text-destructive"
                   aria-hidden="true"
                 />

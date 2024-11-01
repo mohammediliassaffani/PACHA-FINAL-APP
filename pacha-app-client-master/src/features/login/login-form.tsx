@@ -59,7 +59,7 @@ export const LoginForm: React.FC<Props> = ({
       transition={{ duration: 0.5 }}
     >
       <div className="text-center">
-        <h2 className="mt-6 text-3xl font-bold">Nice to see you again</h2>
+        <h2 className="mt-6 text-3xl font-bold">Bienvenue</h2>
       </div>
       <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
@@ -67,7 +67,7 @@ export const LoginForm: React.FC<Props> = ({
             <Input
               id="email"
               type="email"
-              placeholder="Email or phone number"
+              placeholder="Email"
               {...register('email')}
               aria-invalid={errors.email ? 'true' : 'false'}
             />

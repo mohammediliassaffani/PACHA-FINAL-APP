@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreatePersonDto {
   @IsString()
@@ -10,10 +10,10 @@ export class CreatePersonDto {
   lastName: string;
 
   @IsString()
-  @IsNotEmpty({ message: "La carte d'identité de l'homme est obligatoire." })
+  @IsOptional({ message: "La carte d'identité de l'homme est obligatoire." })
   CNIMan: string;
 
   @IsString()
-  @IsNotEmpty({ message: "La carte d'identité de la femme est obligatoire." })
+  @IsOptional({ message: "La carte d'identité de la femme est obligatoire." })
   CNIWoman: string;
 }

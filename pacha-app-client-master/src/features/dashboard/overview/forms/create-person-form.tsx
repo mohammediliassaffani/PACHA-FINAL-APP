@@ -29,11 +29,11 @@ const formSchema = z.object({
   CNIMan: z.string().regex(/^[a-zA-Z]{1,2}\d{5,7}$/, {
     message:
       'Le CNI doit commencer par une ou deux lettres suivies de 5 à 7 chiffres.',
-  }),
+  })optional(),
   CNIWoman: z.string().regex(/^[a-zA-Z]{1,2}\d{5,7}$/, {
     message:
       'Le CNI doit commencer par une ou deux lettres suivies de 5 à 7 chiffres.',
-  }),
+  })optional(),
   firstName: z.string(),
   lastName: z.string(),
   docs: z.array(z.string()).optional(),
@@ -46,8 +46,8 @@ export default function CreatePerson({ onSuccess }: { onSuccess: () => void }) {
   const queryClient = useQueryClient();
 
   const dropZoneConfig = {
-    maxFiles: 5,
-    maxSize: 1024 * 1024 * 4,
+    maxFiles: 10,
+    maxSize: 1024 * 1024 * 10,
     multiple: true,
   };
   const form = useForm<z.infer<typeof formSchema>>({

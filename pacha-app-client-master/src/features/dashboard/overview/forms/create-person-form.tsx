@@ -29,11 +29,11 @@ const formSchema = z.object({
   CNIMan: z.string().regex(/^[a-zA-Z]{1,2}\d{5,7}$/, {
     message:
       'Le CNI doit commencer par une ou deux lettres suivies de 5 à 7 chiffres.',
-  })optional(),
+  }).optional(),
   CNIWoman: z.string().regex(/^[a-zA-Z]{1,2}\d{5,7}$/, {
     message:
       'Le CNI doit commencer par une ou deux lettres suivies de 5 à 7 chiffres.',
-  })optional(),
+  }).optional(),
   firstName: z.string(),
   lastName: z.string(),
   docs: z.array(z.string()).optional(),

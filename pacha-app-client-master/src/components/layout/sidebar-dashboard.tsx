@@ -78,7 +78,7 @@ function Sidebar({
                 isCollapsed ? 'hidden' : 'block'
               )}
             >
-              Bacha App
+              Ramid-App
             </p>
             <p
               className={cn(
@@ -86,7 +86,7 @@ function Sidebar({
                 !isCollapsed ? 'hidden' : 'block'
               )}
             >
-              BA
+              RA
             </p>
           </div>
           <Separator />
@@ -97,7 +97,7 @@ function Sidebar({
         <ResizableHandle withHandle />
         <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
           <div className="px-4 flex h-[52px] items-center justify-between ">
-            <h1 className="text-sm font-bold lg:text-xl ">Admin Dashboard</h1>
+            <h1 className="text-sm font-bold lg:text-xl ">Ramid-App</h1>
             <div className="flex items-center justify-center gap-2">
               <ThemeSwitcher />
 
